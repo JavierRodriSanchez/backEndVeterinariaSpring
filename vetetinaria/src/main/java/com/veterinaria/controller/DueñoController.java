@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.veterinaria.dtos.ClienteDto;
@@ -61,5 +62,49 @@ public class DueñoController {
     public ResponseEntity<Void> deleteDueño(@PathVariable Long id) {
         dueñoService.deleteDueñoById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+    
+    @GetMapping("getClientes")
+    public List<Dueño> getClientes(@RequestParam String nombre){
+    	
+    	return dueñoService.findByName(nombre);
+    	
+    }
+    
+    @GetMapping("getCorreo")
+    public List<Dueño> getCorreo(@RequestParam String correo){
+    	return dueñoService.findByCorreo(correo);
+    }
+    
+    @GetMapping("getTelefono")
+    public List<Dueño> getTelefono(@RequestParam String telefono){
+    	return dueñoService.findByTelefono(telefono);
+    }
+    
+    @GetMapping("getDireccion")
+    public List<Dueño> getDueño(@RequestParam String direccion){
+    	return dueñoService.findDireccion(direccion);
+    	
+    }
+    
+    @GetMapping("orderByPhone")
+    public List<Dueño> orderByPhone(){
+    	return dueñoService.orderByTelefono();
+    	
+    }
+    @GetMapping("orderByName")
+    public List<Dueño> orderByName(){
+    	return dueñoService.orderByName();
+    }
+    
+    @GetMapping("orderByDireccion")
+    public List<Dueño> orderbyDireccion(){
+    	return dueñoService.orderByDireccion();
+    }
+    
+    @GetMapping("orderByCorreo")
+    public List<Dueño> orderByCorreo(){
+    	return dueñoService.orderByCorreo();
     }
 }

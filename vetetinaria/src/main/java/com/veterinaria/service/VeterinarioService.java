@@ -23,7 +23,24 @@ public class VeterinarioService {
 		return veterinarioRepository.findAll();
 
 	}
-
+	
+	public List<Veterinario> findByPhone(String phone){
+		return veterinarioRepository.findByTelefono(phone);
+	}
+	
+	public List<Veterinario> findByCode(String code){
+	return	veterinarioRepository.findBycodigo(code);
+	}
+	
+	
+	public List<Veterinario> findByName(String nombre)
+	{
+		return veterinarioRepository.findByNombre(nombre);
+	}
+	public List<Veterinario>findMail(String mail){
+		return veterinarioRepository.findByMail(mail);
+	}
+	
 	// Método para obtener un veterinario por su ID
 	public Optional<Veterinario> findById(Long id) {
 		return veterinarioRepository.findById(id);
@@ -69,12 +86,7 @@ public class VeterinarioService {
 			return findAll;
 		}
 		
-	//Método para encontrar por correo
-	public Veterinario searchByCorreo(String correo) {
-		
-	return	veterinarioRepository.findByMail(correo);
-		
-	}
+
 	//Metodo para borrar por id 
 	public void deleteByIdVeterinarios(Long id) {
 		

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.veterinaria.dtos.MedicinaDto;
 import com.veterinaria.entities.Medicina;
+import com.veterinaria.entities.Tipo;
 import com.veterinaria.service.MedicinaService;
 
 @RestController
@@ -25,7 +27,13 @@ public class MedicinaController {
 	@Autowired
 	MedicinaService medicinaService;
 	
-
+	 @GetMapping("/tipo/{tipoId}")
+	    public ResponseEntity<List<MedicinaDto>> getMedicinaByTipo(@PathVariable Long tipoId) {
+	        Tipo tipo = new Tipo();
+	        tipo.setIdTipo(tipoId);
+	        List<MedicinaDto> medicinas = medicinaService.findByTipo(tipo);
+	        return ResponseEntity.ok(medicinas);
+	    }
     // Endpoint para crear una medicina
     @PostMapping
     public ResponseEntity<Medicina> createMedicina(@RequestBody Medicina medicina) {

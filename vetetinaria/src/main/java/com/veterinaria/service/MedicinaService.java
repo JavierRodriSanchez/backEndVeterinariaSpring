@@ -6,7 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.veterinaria.dtos.MedicinaDto;
 import com.veterinaria.entities.Medicina;
+import com.veterinaria.entities.Tipo;
+import com.veterinaria.mappers.MedicinaDtoMapper;
 import com.veterinaria.repository.MedicinaRepository;
 @Service
 public class MedicinaService {
@@ -14,6 +17,12 @@ public class MedicinaService {
 	
 	@Autowired
 	MedicinaRepository medicinaRepository;
+	
+	public List<MedicinaDto> findByTipo(Tipo tipo) {
+		
+		
+        return MedicinaDtoMapper.entitiesToDtos(medicinaRepository.findByTipo(tipo));
+    }
 	
 	// Método para guardar una medicina
     public Medicina saveMedicina(Medicina medicina) {

@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.veterinaria.dtos.PagosDto;
+import com.veterinaria.dtos.PagosDtoRequest;
 import com.veterinaria.entities.Pagos;
 import com.veterinaria.service.PagosService;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/api/paid")
@@ -24,10 +28,22 @@ public class PagosController {
 
 	@Autowired
     private PagosService pagosService;
-
+	
+	
+	@PostMapping("/añadir")
+    public ResponseEntity<Pagos> crearPago(@RequestBody PagosDtoRequest pagosRequest) {
+        try {
+            Pagos nuevoPago = pagosService.crearPago(pagosRequest);
+            return new ResponseEntity<>(nuevoPago, HttpStatus.CREATED);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @GetMapping
-    public ResponseEntity<List<Pagos>> getAllMascotas() {
-        List<Pagos> mascotas = pagosService.getAllMedicinas();
+    public ResponseEntity<List<PagosDto>> getAllMascotas() {
+        List<PagosDto> mascotas = pagosService.getAllMedicinas();
         return ResponseEntity.ok(mascotas);
     }
 

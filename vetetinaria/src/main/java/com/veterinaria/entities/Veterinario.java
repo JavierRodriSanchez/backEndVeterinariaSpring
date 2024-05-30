@@ -37,8 +37,7 @@ public class Veterinario {
     
    
     @Column(name = "codColegiado")
-   // Agregar esta anotación para mapear correctamente desde JSON
-    private String codColegiado; // Cambiado el nombre del campo para que coincida con el JSON
+    private String codColegiado; 
     
 
     @Column(name = "contrasena")
@@ -50,8 +49,8 @@ public class Veterinario {
 
 
     @Column(name = "nombrevet")
-  // Agregar esta anotación para mapear correctamente desde JSON
-    private String nombre; // Cambiado el nombre del campo para que coincida con el JSON
+  
+    private String nombre; 
     
    
     @Column(name = "telefono")

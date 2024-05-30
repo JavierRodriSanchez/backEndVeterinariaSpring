@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.veterinaria.dtos.ClienteDto;
@@ -63,7 +64,47 @@ public class DueñoService {
         dueñoRepository.deleteById(id);
     }
 	
+	public List<Dueño> findByName(String name){
+		
+		return dueñoRepository.findByNombre(name);
+	}
 	
 	
+	public List<Dueño> findByTelefono(String telefono){
+		return dueñoRepository.findByTelefono(telefono);
+	}
 	
+	public List<Dueño> findByCorreo(String correo) {
+		return dueñoRepository.findByCorreo(correo);
+	}
+	
+	
+	public List<Dueño> findDireccion(String direccion){
+		
+		return dueñoRepository.findByDireccion(direccion);
+	}
+	
+	//Método para ordenar por nombre
+		public List<Dueño> orderByName() {
+
+			List<Dueño> findAll = dueñoRepository.findAll(Sort.by("nombre"));
+			return findAll;
+		}
+		
+		public List<Dueño> orderByTelefono() {
+
+			List<Dueño> findAll = dueñoRepository.findAll(Sort.by("telefono"));
+			return findAll;
+		}
+		
+		public List<Dueño> orderByCorreo() {
+
+			List<Dueño> findAll = dueñoRepository.findAll(Sort.by("correo"));
+			return findAll;
+		}
+		public List<Dueño> orderByDireccion() {
+
+			List<Dueño> findAll = dueñoRepository.findAll(Sort.by("direccion"));
+			return findAll;
+		}
 }

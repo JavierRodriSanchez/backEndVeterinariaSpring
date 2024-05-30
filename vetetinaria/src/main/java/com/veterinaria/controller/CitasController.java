@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.veterinaria.dtos.CitaDto;
 import com.veterinaria.entities.Cita;
 import com.veterinaria.entities.Mascota;
 import com.veterinaria.service.CitaService;
@@ -35,6 +36,10 @@ public class CitasController {
 		
 	}
 	
+	@GetMapping("/CitasWithPets")
+	public List<CitaDto> getCitas() {
+        return citaService.listCitasWithPets();
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Cita> getMascotaById(@PathVariable("id") Long id) {
@@ -67,15 +72,26 @@ public class CitasController {
     
     
     @GetMapping("/orderByDate")
-    public List<Cita> orderByDate(){
+    public List<CitaDto> orderByDate(){
     	
     	return citaService.orderByDate();
     	
     }
     
+    @GetMapping("getNamePets")
+    public List<CitaDto> getNamePets(@RequestParam String nombreMascota){
+    	return citaService.findNamePets(nombreMascota);
+    }
+    
     
     @GetMapping("/citas")
-    public List<Cita> getCitasByMotivo(@RequestParam String motivo) {
+    public List<CitaDto> getCitasByMotivo(@RequestParam String motivo) {
         return citaService.findMotivosStartWith(motivo);
     }
+    
+    @GetMapping("/mascota/{mascotaId}")
+    public List<CitaDto> getCitasByMascotaId(@PathVariable Long mascotaId) {
+        return citaService.findCitasByMascotaId(mascotaId);
+    }
+    
 }
